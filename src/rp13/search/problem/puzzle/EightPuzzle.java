@@ -232,24 +232,17 @@ public class EightPuzzle {
 	}
 
 	public static void main(String[] args) {
+		
 		EightPuzzle puzzle = EightPuzzle.orderedEightPuzzle();
-		System.out.println(puzzle);
-		puzzle.makeMove(PuzzleMove.UP);
-		System.out.println(puzzle);
-		puzzle.makeMove(PuzzleMove.LEFT);
-		System.out.println(puzzle);
-		puzzle.makeMove(PuzzleMove.LEFT);
-		System.out.println(puzzle);
-		puzzle.makeMove(PuzzleMove.LEFT);
-		System.out.println(puzzle);
-		puzzle.makeMove(PuzzleMove.RIGHT);
-		System.out.println(puzzle);
-		puzzle.makeMove(PuzzleMove.RIGHT);
-		System.out.println(puzzle);
-		puzzle.makeMove(PuzzleMove.RIGHT);
+
 		System.out.println(puzzle);
 
-		
+		for (PuzzleMove move : PuzzleMove.values()) {
+			puzzle.makeMove(move);
+			System.out.println(move);
+			System.out.println(puzzle);
+		}
+
 	}
 
 }
