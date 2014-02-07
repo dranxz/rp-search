@@ -24,4 +24,11 @@ public interface Agenda<ItemT> extends Iterable<ItemT> {
 	 */
 	ItemT pop();
 
+	/**
+	 * Returns true if the agenda is empty
+	 * 
+	 * @return
+	 */
+	boolean isEmpty();
+
 }
