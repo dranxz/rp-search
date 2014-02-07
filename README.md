@@ -13,6 +13,8 @@ To use this code in your project you first need to clone the project into your E
 
 ## Using the code
 
+You should develop your own code in a *separate project* to `rp-search` as this will allow you to easily update the provided code if necessary. To do this, use the `Java Build Path` entry in your other project's properties, and `Add...` the `rp-search` project under the `Projects` tab.
+
 The interfaces are only provided as a guideline. If you want to ignore them, or change them (for the better), please feel free to do so. If you wish to change them, you can [fork this repository](https://github.com/hawesie/rp-search/fork) to create your own copy. 
 
 ## Fixing bugs
