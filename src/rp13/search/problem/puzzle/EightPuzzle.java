@@ -1,7 +1,7 @@
 package rp13.search.problem.puzzle;
 
+
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -36,8 +36,7 @@ public class EightPuzzle {
 		/**
 		 * Cached result of values such that copy isn't done every time.
 		 */
-		private static final List<PuzzleMove> VALUES = Collections
-				.unmodifiableList(Arrays.asList(values()));
+		private static final List<PuzzleMove> VALUES = rp.util.Arrays.asList(values());
 
 		/***
 		 * Count of values in list
