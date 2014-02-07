@@ -36,12 +36,12 @@ public class EightPuzzle {
 		/**
 		 * Cached result of values such that copy isn't done every time.
 		 */
-		private static final List<PuzzleMove> VALUES = rp.util.Arrays.asList(values());
+		private static final PuzzleMove[] VALUES = values();
 
 		/***
 		 * Count of values in list
 		 */
-		private static final int SIZE = VALUES.size();
+		private static final int SIZE = VALUES.length;
 
 		/**
 		 * Random number generator
@@ -54,7 +54,7 @@ public class EightPuzzle {
 		 * @return
 		 */
 		public static PuzzleMove randomMove() {
-			return VALUES.get(RANDOM.nextInt(SIZE));
+			return VALUES[RANDOM.nextInt(SIZE)];
 		}
 
 	}
