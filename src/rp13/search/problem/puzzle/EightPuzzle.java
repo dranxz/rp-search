@@ -80,9 +80,22 @@ public class EightPuzzle {
 	 */
 	private int m_blankPosition;
 
+	/**
+	 * Create an eight puzzle in its default configuration
+	 */
 	private EightPuzzle() {
 		m_board = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, BLANK };
 		m_blankPosition = m_board.length - 1;
+	}
+
+	/**
+	 * Create a new eight puzzle by copying the given puzzle
+	 * 
+	 * @param _that
+	 */
+	public EightPuzzle(EightPuzzle _that) {
+		m_board = Arrays.copyOf(_that.m_board, _that.m_board.length);
+		m_blankPosition = _that.m_blankPosition;
 	}
 
 	/**
@@ -101,7 +114,8 @@ public class EightPuzzle {
 	 * Checks whether the given move is possible given the current blank
 	 * position.
 	 * 
-	 * @param _move The move to make.
+	 * @param _move
+	 *            The move to make.
 	 * @return Returns true if the move is possible, else false.
 	 */
 	public boolean isPossibleMove(PuzzleMove _move) {
@@ -112,16 +126,17 @@ public class EightPuzzle {
 	/**
 	 * Attempts to move the blank by the given move.
 	 * 
-	 * @param _move The move to make.
+	 * @param _move
+	 *            The move to make.
 	 * @return Returns true if the move was possible, else false.
 	 */
 	public boolean makeMove(PuzzleMove _move) {
 		if (isPossibleMove(_move)) {
-			//where should the blank end up
+			// where should the blank end up
 			int newBlankPosition = m_blankPosition + _move.m_move;
-			//get the piece that was in that position
-			int toSwapWith = m_board[newBlankPosition];			
-			//then swap them around
+			// get the piece that was in that position
+			int toSwapWith = m_board[newBlankPosition];
+			// then swap them around
 			m_board[newBlankPosition] = BLANK;
 			m_board[m_blankPosition] = toSwapWith;
 			m_blankPosition = newBlankPosition;
@@ -153,6 +168,22 @@ public class EightPuzzle {
 
 		}
 		return sb.toString();
+
+	}
+
+	@Override
+	public boolean equals(Object _that) {
+		if (_that instanceof EightPuzzle) {
+			EightPuzzle that = (EightPuzzle) _that;
+
+			// cheapest comparison first
+			if (this.m_blankPosition == that.m_blankPosition) {
+				// compare both boards
+				return Arrays.equals(this.m_board, that.m_board);
+			}
+		}
+
+		return false;
 
 	}
 
@@ -189,7 +220,8 @@ public class EightPuzzle {
 
 	public static void main(String[] args) {
 		EightPuzzle puzzle = EightPuzzle.randomEightPuzzle();
-		System.out.println(puzzle);
+		System.out.println(new EightPuzzle(puzzle));
+
 	}
 
 }

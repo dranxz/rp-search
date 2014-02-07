@@ -13,32 +13,42 @@ public class ActionStatePair<ActionT, StateT> {
 
 	private final ActionT m_action;
 	private final StateT m_state;
-	
+
 	/**
 	 * Construct the pair from input values.
+	 * 
 	 * @param _action
 	 * @param _state
 	 */
-	public ActionStatePair(ActionT _action, StateT _state) {	
+	public ActionStatePair(ActionT _action, StateT _state) {
 		m_action = _action;
 		m_state = _state;
 	}
 
 	/**
 	 * Get action.
+	 * 
 	 * @return
 	 */
 	public ActionT getAction() {
 		return m_action;
 	}
 
-	
 	/**
 	 * Get state.
+	 * 
 	 * @return
 	 */
 	public StateT getState() {
 		return m_state;
 	}
-	
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder(m_action.toString());
+		sb.append("\n -> \n");
+		sb.append(m_state);
+		return sb.toString();
+	}
+
 }

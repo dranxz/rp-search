@@ -12,7 +12,7 @@ import rp13.search.util.ActionStatePair;
  * Defines an interface that can be used by a search algorithm to get the
  * successor of a given state.
  * 
- * @author nah
+ * @author Nick Hawes
  * 
  */
 public interface SuccessorFunction<ActionT, StateT> {
