@@ -31,4 +31,12 @@ public interface Agenda<ItemT> extends Iterable<ItemT> {
 	 */
 	boolean isEmpty();
 
+	/**
+	 * Returns true if the agenda contains the given item.
+	 * 
+	 * @param _item
+	 * @return
+	 */
+	boolean contains(ItemT _item);
+
 }
