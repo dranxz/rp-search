@@ -24,7 +24,7 @@ public class EightPuzzle {
 	 * @author nah
 	 * 
 	 */
-	private enum PuzzleMove {
+	public enum PuzzleMove {
 		UP(-3), DOWN(3), LEFT(-1), RIGHT(1);
 
 		private final int m_move;
@@ -93,19 +93,42 @@ public class EightPuzzle {
 		boolean moveMade = false;
 		while (!moveMade) {
 			PuzzleMove move = PuzzleMove.randomMove();
-			int newBlankPosition = m_blankPosition + move.m_move;
-
-			// check whether this is a legal move, i.e. it keeps within board
-			// dimensions
-			if (newBlankPosition >= 0 && newBlankPosition < m_board.length) {
-				int toSwapWith = m_board[newBlankPosition];
-				m_board[newBlankPosition] = BLANK;
-				m_board[m_blankPosition] = toSwapWith;
-				m_blankPosition = newBlankPosition;
-				moveMade = true;
-			}
+			moveMade = makeMove(move);
 		}
+	}
 
+	/**
+	 * Checks whether the given move is possible given the current blank
+	 * position.
+	 * 
+	 * @param _move The move to make.
+	 * @return Returns true if the move is possible, else false.
+	 */
+	public boolean isPossibleMove(PuzzleMove _move) {
+		int newBlankPosition = m_blankPosition + _move.m_move;
+		return newBlankPosition >= 0 && newBlankPosition < m_board.length;
+	}
+
+	/**
+	 * Attempts to move the blank by the given move.
+	 * 
+	 * @param _move The move to make.
+	 * @return Returns true if the move was possible, else false.
+	 */
+	public boolean makeMove(PuzzleMove _move) {
+		if (isPossibleMove(_move)) {
+			//where should the blank end up
+			int newBlankPosition = m_blankPosition + _move.m_move;
+			//get the piece that was in that position
+			int toSwapWith = m_board[newBlankPosition];			
+			//then swap them around
+			m_board[newBlankPosition] = BLANK;
+			m_board[m_blankPosition] = toSwapWith;
+			m_blankPosition = newBlankPosition;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
