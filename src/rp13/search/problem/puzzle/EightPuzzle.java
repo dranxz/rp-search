@@ -2,7 +2,6 @@ package rp13.search.problem.puzzle;
 
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 /**
