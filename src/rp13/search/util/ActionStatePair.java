@@ -45,10 +45,13 @@ public class ActionStatePair<ActionT, StateT> {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder(m_action.toString());
-		sb.append("\n -> \n");
+		StringBuilder sb = new StringBuilder();
 		sb.append(m_state);
+		if (m_action != null) {
+			sb.append("\n -> \n");
+			sb.append(m_action);
+		}
+
 		return sb.toString();
 	}
-
 }

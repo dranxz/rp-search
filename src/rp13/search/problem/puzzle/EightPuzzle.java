@@ -120,7 +120,20 @@ public class EightPuzzle {
 	 */
 	public boolean isPossibleMove(PuzzleMove _move) {
 		int newBlankPosition = m_blankPosition + _move.m_move;
-		return newBlankPosition >= 0 && newBlankPosition < m_board.length;
+
+		// if move stays within board
+		if (newBlankPosition >= 0 && newBlankPosition < m_board.length) {
+
+			// check that it's not off the edges
+			int currentRow = m_blankPosition / WIDTH;
+			int newRow = newBlankPosition / WIDTH;
+
+			// either the move stays on the same row, or it's a vertical move
+			return (currentRow == newRow) || Math.abs(_move.m_move) > 1;
+
+		}
+
+		return false;
 	}
 
 	/**
@@ -219,9 +232,24 @@ public class EightPuzzle {
 	}
 
 	public static void main(String[] args) {
-		EightPuzzle puzzle = EightPuzzle.randomEightPuzzle();
-		System.out.println(new EightPuzzle(puzzle));
+		EightPuzzle puzzle = EightPuzzle.orderedEightPuzzle();
+		System.out.println(puzzle);
+		puzzle.makeMove(PuzzleMove.UP);
+		System.out.println(puzzle);
+		puzzle.makeMove(PuzzleMove.LEFT);
+		System.out.println(puzzle);
+		puzzle.makeMove(PuzzleMove.LEFT);
+		System.out.println(puzzle);
+		puzzle.makeMove(PuzzleMove.LEFT);
+		System.out.println(puzzle);
+		puzzle.makeMove(PuzzleMove.RIGHT);
+		System.out.println(puzzle);
+		puzzle.makeMove(PuzzleMove.RIGHT);
+		System.out.println(puzzle);
+		puzzle.makeMove(PuzzleMove.RIGHT);
+		System.out.println(puzzle);
 
+		
 	}
 
 }
