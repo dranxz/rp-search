@@ -1,0 +1,172 @@
+package rp13.search.problem.puzzle;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+/**
+ * 
+ * A class to represent a 3x3 sliding tile puzzle, such as:
+ * 
+ * 1 2 3 4 5 6 7 8 X
+ * 
+ * where the X represents the blank tile which can be slid around
+ * 
+ * @author Nick Hawes
+ * 
+ */
+public class EightPuzzle {
+
+	/**
+	 * Explicit enumeration of moves the blank tile can take.
+	 * 
+	 * @author nah
+	 * 
+	 */
+	private enum PuzzleMove {
+		UP(-3), DOWN(3), LEFT(-1), RIGHT(1);
+
+		private final int m_move;
+
+		private PuzzleMove(int _move) {
+			m_move = _move;
+		}
+
+		/**
+		 * Cached result of values such that copy isn't done every time.
+		 */
+		private static final List<PuzzleMove> VALUES = Collections
+				.unmodifiableList(Arrays.asList(values()));
+
+		/***
+		 * Count of values in list
+		 */
+		private static final int SIZE = VALUES.size();
+
+		/**
+		 * Random number generator
+		 */
+		private static final Random RANDOM = new Random();
+
+		/**
+		 * Returns a move selected at random.
+		 * 
+		 * @return
+		 */
+		public static PuzzleMove randomMove() {
+			return VALUES.get(RANDOM.nextInt(SIZE));
+		}
+
+	}
+
+	/**
+	 * The pieces in the puzzle, represented as an array.
+	 */
+	protected final int[] m_board;
+
+	/**
+	 * The value that represents the blank.
+	 */
+	protected final static int BLANK = 0;
+
+	/**
+	 * Width of the board
+	 */
+	protected final static int WIDTH = 3;
+
+	/**
+	 * Where the blank is currently located in the array
+	 */
+	private int m_blankPosition;
+
+	private EightPuzzle() {
+		m_board = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, BLANK };
+		m_blankPosition = m_board.length - 1;
+	}
+
+	/**
+	 * Slide the blank tile randomly once.
+	 */
+	public void randomMove() {
+
+		boolean moveMade = false;
+		while (!moveMade) {
+			PuzzleMove move = PuzzleMove.randomMove();
+			int newBlankPosition = m_blankPosition + move.m_move;
+
+			// check whether this is a legal move, i.e. it keeps within board
+			// dimensions
+			if (newBlankPosition >= 0 && newBlankPosition < m_board.length) {
+				int toSwapWith = m_board[newBlankPosition];
+				m_board[newBlankPosition] = BLANK;
+				m_board[m_blankPosition] = toSwapWith;
+				m_blankPosition = newBlankPosition;
+				moveMade = true;
+			}
+		}
+
+	}
+
+	@Override
+	public String toString() {
+
+		// use a string builder for efficiency
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < m_board.length; i++) {
+			sb.append("| ");
+			if (m_board[i] == BLANK) {
+				sb.append("X");
+			} else {
+				sb.append(m_board[i]);
+			}
+			sb.append(" ");
+
+			// detect end of the board
+			if ((i + 1) % WIDTH == 0) {
+				sb.append("|\n");
+			}
+
+		}
+		return sb.toString();
+
+	}
+
+	/**
+	 * Creates an eight puzzle with the pieces in the correct order
+	 * 
+	 * @return
+	 */
+	public static EightPuzzle orderedEightPuzzle() {
+		return new EightPuzzle();
+	}
+
+	/**
+	 * Creates a randomised eight puzzle using the given number of random moves.
+	 * 
+	 * @return
+	 */
+	public static EightPuzzle randomEightPuzzle(int _moves) {
+		EightPuzzle puzzle = new EightPuzzle();
+		for (int i = 0; i < _moves; i++) {
+			puzzle.randomMove();
+		}
+		return puzzle;
+	}
+
+	/**
+	 * Creates a randomised eight puzzle.
+	 * 
+	 * @return
+	 */
+	public static EightPuzzle randomEightPuzzle() {
+		return randomEightPuzzle(WIDTH * WIDTH * WIDTH);
+	}
+
+	public static void main(String[] args) {
+		EightPuzzle puzzle = EightPuzzle.randomEightPuzzle();
+		System.out.println(puzzle);
+	}
+
+}
