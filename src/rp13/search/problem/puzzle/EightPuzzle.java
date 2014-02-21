@@ -183,24 +183,22 @@ public class EightPuzzle {
 	}
 	
 	/**
-	 * Returns a representation of the Eight Puzzle on one line.
-	 * Not necessary, but very useful for comparisons in
-	 * implementations of A* and similar. Means you don't
-	 * need to parse for the useful parts of the prettier printing
-	 * and more innately more natural numerical comparisons.
+	 * Returns a String representation of the Eight Puzzle on a single line.
 	 * 
 	 * @return A one-line representation of the EightPuzzle.
 	 */
-	public String toSimpleString()
+	public String toSingleLineString()
 	{
 		StringBuilder sb = new StringBuilder();
 		
 		for (int i = 0; i < m_board.length; i++) 
 		{
-			if (m_board[i] == BLANK)
+			if (m_board[i] == BLANK) {
 				sb.append("X");
-			else
+			}
+			else {
 				sb.append(m_board[i]);
+			}
 		}
 		
 		return sb.toString();
@@ -225,7 +223,7 @@ public class EightPuzzle {
 	/**
 	 * Creates an eight puzzle with the pieces in the correct order
 	 * 
-	 * @return Returns an ordered Eight Puzzle, the goal state.
+	 * @return Returns an ordered Eight Puzzle.
 	 */
 	public static EightPuzzle orderedEightPuzzle() {
 		return new EightPuzzle();
@@ -234,7 +232,7 @@ public class EightPuzzle {
 	/**
 	 * Creates a randomised eight puzzle using the given number of random moves.
 	 * 
-	 * @return
+	 * @return Returns a random (but legal) Eight Puzzle.
 	 */
 	public static EightPuzzle randomEightPuzzle(int _moves) {
 		EightPuzzle puzzle = new EightPuzzle();
