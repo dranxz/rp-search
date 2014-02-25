@@ -1,6 +1,5 @@
 package rp13.search.problem.puzzle;
 
-
 import java.util.Arrays;
 import java.util.Random;
 
@@ -53,9 +52,14 @@ public class EightPuzzle {
 		 * @return
 		 */
 		public static PuzzleMove randomMove() {
-			return VALUES[RANDOM.nextInt(SIZE)];
-		}
 
+			// fix for https://github.com/hawesie/rp-search/issues/3
+			// using Math.max to make sure -1 is never return (which is a mathematical possibility)
+			int pick = (int) Math.max(
+					Math.ceil(RANDOM.nextDouble() * SIZE) - 1, 0);
+
+			return VALUES[pick];
+		}
 	}
 
 	/**
@@ -181,26 +185,23 @@ public class EightPuzzle {
 		return sb.toString();
 
 	}
-	
+
 	/**
 	 * Returns a String representation of the Eight Puzzle on a single line.
 	 * 
 	 * @return A one-line representation of the EightPuzzle.
 	 */
-	public String toSingleLineString()
-	{
+	public String toSingleLineString() {
 		StringBuilder sb = new StringBuilder();
-		
-		for (int i = 0; i < m_board.length; i++) 
-		{
+
+		for (int i = 0; i < m_board.length; i++) {
 			if (m_board[i] == BLANK) {
 				sb.append("X");
-			}
-			else {
+			} else {
 				sb.append(m_board[i]);
 			}
 		}
-		
+
 		return sb.toString();
 	}
 
@@ -252,7 +253,7 @@ public class EightPuzzle {
 	}
 
 	public static void main(String[] args) {
-		
+
 		EightPuzzle puzzle = EightPuzzle.orderedEightPuzzle();
 
 		System.out.println(puzzle);
