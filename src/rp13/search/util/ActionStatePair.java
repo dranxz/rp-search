@@ -43,6 +43,18 @@ public class ActionStatePair<ActionT, StateT> {
 		return m_state;
 	}
 
+	
+	@Override 
+	public boolean equals(Object _that) {
+		if(_that instanceof ActionStatePair) {
+			ActionStatePair<?, ?> that = (ActionStatePair<?, ?>) _that;
+			return this.getState().equals(that.getState()) && this.getAction().equals(that.getAction());
+		}
+		else {
+			return false;
+		}
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -54,4 +66,7 @@ public class ActionStatePair<ActionT, StateT> {
 
 		return sb.toString();
 	}
+	
+
+	
 }

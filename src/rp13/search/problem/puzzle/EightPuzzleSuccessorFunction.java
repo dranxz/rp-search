@@ -72,6 +72,16 @@ public class EightPuzzleSuccessorFunction implements
 
 		}
 
+		// this bit is just to test .equals
+		List<ActionStatePair<PuzzleMove, EightPuzzle>> successorsDuplicate = new ArrayList<ActionStatePair<PuzzleMove, EightPuzzle>>();
+		successorFn.getSuccessors(state, successorsDuplicate);
+		
+		for (ActionStatePair<PuzzleMove, EightPuzzle> successor : successors) {
+			if(!successorsDuplicate.contains(successor)) {
+				throw new RuntimeException("not working");
+			}
+		}
+		
 	}
 
 }
